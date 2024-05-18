@@ -234,6 +234,23 @@ const Tasks = () => {
     dispatch(setOpenPreviewPDF(true));
   };
 
+  const getColor = (type) => {
+    switch (type) {
+      case "Q&A":
+        return "green";
+      case "Development":
+        return "orange";
+      case "Design":
+        return "red";
+      case "Business Analyst":
+        return "blue";
+      case "Test":
+        return "yellow";
+      default:
+        return "green"; // This will use the default color of the Tag component
+    }
+  };
+
   React.useEffect(() => {
     getListTasks();
     getCurrentUserAvatar();
@@ -282,7 +299,7 @@ const Tasks = () => {
                       <div>{ele.name}</div>
                       {ele.type && (
                         <div>
-                          <Tag color="green">{ele.type}</Tag>
+                          <Tag color={getColor(ele.type)}>{ele.type}</Tag>
                         </div>
                       )}
                     </div>
@@ -340,6 +357,14 @@ const Tasks = () => {
                 </div>
                 <div style={{ fontSize: 14 }}>
                   {itemDetail?.assignee?.name ?? ""}
+                </div>
+              </div>
+              <div>
+                <div style={{ fontSize: 16, fontWeight: "bold" }}>
+                  Ngày bắt đầu
+                </div>
+                <div style={{ fontSize: 14 }}>
+                  {convertDateString(itemDetail?.startDate ?? "")}
                 </div>
               </div>
               <div>
